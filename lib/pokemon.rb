@@ -8,12 +8,12 @@ class Pokemon
     @db = db 
   end 
   
-    def self.save(name, type, database_connection)
-    database_connection.execute("INSERT INTO pokemon (name, type) VALUES (?, ?)", name, type)
+    def self.save
+    DB[:conn].execute("INSERT INTO pokemon (name, type) VALUES (?, ?)", name, type)
   end
 
-  def self.find(id, database_connection)
-    pokemon = database_connection.execute("SELECT * FROM pokemon WHERE id = ?", id).flatten
+  def self.find(id)
+    pokemon = DB[:conn].execute("SELECT * FROM pokemon WHERE id = ?", id).flatten
     name = pokemon[1]
     type = pokemon[2]
 
