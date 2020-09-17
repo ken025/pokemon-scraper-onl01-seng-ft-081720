@@ -8,11 +8,12 @@ class Pokemon
     @db = db 
   end 
   
-  def self.save
-    sql = "INSERT INTO songs (name, album)
-    VALUES(?,?)"
-    
-   DB[:conn].execute(sql, self.name, self.type, self.db, self.id)
-   @id = DB[:conn].execute("SELECT las_insert_rowid() FROM pokemons")[0][0]
- end 
+  def self.find(id, database_connection)
+    pokemon = database_connection.execute("SELECT * FROM pokemon WHERE id = ?", id).flatten
+    name = pokemon[1]
+    type = pokemon[2]
+    hp = pokemon[3]
+
+    pokemon_inst = Pokemon.new(id: id, name: name, type: type, hp: hp, db: database_connection)
+  end
 end
