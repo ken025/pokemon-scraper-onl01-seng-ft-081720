@@ -8,7 +8,7 @@ class Pokemon
     @db = db 
   end 
   
-    ef self.save(name, type, database_connection)
+    def self.save(name, type, database_connection)
     database_connection.execute("INSERT INTO pokemon (name, type) VALUES (?, ?)", name, type)
   end
 
@@ -19,5 +19,4 @@ class Pokemon
 
     pokemon_inst = Pokemon.new(id: id, name: name, type: type, db: database_connection)
   end
-end 
 end 
