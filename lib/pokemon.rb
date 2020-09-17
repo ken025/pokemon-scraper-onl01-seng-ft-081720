@@ -12,5 +12,7 @@ class Pokemon
     sql = "INSERT INTO songs (name, album)
     VALUES(?,?)"
     
-    DB
+   DB[:conn].execute(sql, self.name, self.type, self.db, self.id)
+   @id = DB[:conn].execute("SELECT las_insert_rowid() FROM pokemons")[0][0]
+ end 
 end
